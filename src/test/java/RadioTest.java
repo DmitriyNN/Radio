@@ -3,6 +3,180 @@ import org.junit.jupiter.api.Test;
 import ru.netology.Radio;
 
 public class RadioTest {
+
+    @Test
+    public void shouldSetStation1() { // Тестируем значение фактической станции
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(34);
+        int expected = 34;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldOverSetStation1() { // Тестируем значение станции за пределами диапазона
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(65);
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetLimitStation01() { // Тестируем граничное станции = 1
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(1);
+        int expected = 1;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetLimitStation02() { // Тестируем граничное станции = 0
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(0);
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetLimitStation03() { // Тестируем граничное станции = -1
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(-1);
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetLimitStation04() { // Тестируем граничное станции = 48
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(48);
+        int expected = 48;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetLimitStation05() { // Тестируем граничное станции = 49
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(49);
+        int expected = 49;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetLimitStation06() { // Тестируем граничное станции = 50
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(50);
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNextStation1() { // Тестируем переключение на следующую станцию
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(42);
+        radio.nextStation();
+        int expected = 43;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNextLimitStation1() { // Тестируем граничные значения = 0, при переключении на следующую станцию
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(0);
+        radio.nextStation();
+        int expected = 1;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNextLimitStation2() { // Тестируем граничные значения = 1, при переключении на следующую станцию
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(1);
+        radio.nextStation();
+        int expected = 2;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNextLimitStation3() { // Тестируем граничные значения = 48, при переключении на следующую станцию
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(48);
+        radio.nextStation();
+        int expected = 49;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNextLimitStation4() { // Тестируем граничные значения = 49, при переключении на следующую станцию
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(49);
+        radio.nextStation();
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldPrevStation() { // Тестируем переключение на предыдущую станцию
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(23);
+        radio.prevStation();
+        int expected = 22;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldPrevLimitStation1() { // Тестируем граничные значения = 1, при переключении на предыдущую станцию
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(1);
+        radio.prevStation();
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldPrevLimitStation02() { // Тестируем граничные значения = 0, при переключении на предыдущую станцию
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(0);
+        radio.prevStation();
+        int expected = 49;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldPrevLimitStation03() { // Тестируем граничные значения = 49, при переключении на предыдущую станцию
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(49);
+        radio.prevStation();
+        int expected = 48;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldPrevLimitStation04() { // Тестируем граничные значения = 48, при переключении на предыдущую станцию
+        Radio radio = new Radio(50);
+        radio.setCurrentStation(48);
+        radio.prevStation();
+        int expected = 47;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+
+
     @Test
     public void shouldSetStation() { // Тестируем значение фактической станции
         Radio radio = new Radio();
@@ -13,7 +187,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldOverSetStation1() { // Тестируем значение станции за пределами диапазона
+    public void shouldOverSetStation() { // Тестируем значение станции за пределами диапазона
         Radio radio = new Radio();
         radio.setCurrentStation(15);
         int expected = 0;
@@ -86,7 +260,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNextLimitStation1() { // Тестируем граничные значения = 0, при переключении на следующую станцию
+    public void shouldNextLimitStation01() { // Тестируем граничные значения = 0, при переключении на следующую станцию
         Radio radio = new Radio();
         radio.setCurrentStation(0);
         radio.nextStation();
@@ -96,7 +270,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNextLimitStation2() { // Тестируем граничные значения = 1, при переключении на следующую станцию
+    public void shouldNextLimitStation02() { // Тестируем граничные значения = 1, при переключении на следующую станцию
         Radio radio = new Radio();
         radio.setCurrentStation(1);
         radio.nextStation();
@@ -106,7 +280,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNextLimitStation3() { // Тестируем граничные значения = 8, при переключении на следующую станцию
+    public void shouldNextLimitStation03() { // Тестируем граничные значения = 8, при переключении на следующую станцию
         Radio radio = new Radio();
         radio.setCurrentStation(8);
         radio.nextStation();
@@ -116,7 +290,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNextLimitStation4() { // Тестируем граничные значения = 9, при переключении на следующую станцию
+    public void shouldNextLimitStation04() { // Тестируем граничные значения = 9, при переключении на следующую станцию
         Radio radio = new Radio();
         radio.setCurrentStation(9);
         radio.nextStation();
@@ -126,7 +300,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldPrevStation() { // Тестируем переключение на предыдущую станцию
+    public void shouldPrevStation1() { // Тестируем переключение на предыдущую станцию
         Radio radio = new Radio();
         radio.setCurrentStation(3);
         radio.prevStation();
@@ -136,7 +310,7 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldPrevLimitStation1() { // Тестируем граничные значения = 1, при переключении на предыдущую станцию
+    public void shouldPrevLimitStation01() { // Тестируем граничные значения = 1, при переключении на предыдущую станцию
         Radio radio = new Radio();
         radio.setCurrentStation(1);
         radio.prevStation();
@@ -178,8 +352,8 @@ public class RadioTest {
     @Test
     public void shouldSetVolume() { // Тестируем фактическую громкость звука
         Radio radio = new Radio();
-        radio.setCurrentVolume(4);
-        int expected = 4;
+        radio.setCurrentVolume(64);
+        int expected = 64;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
@@ -212,28 +386,28 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetVolume4() { // Тестируем граничные значения = 9
+    public void shouldSetVolume4() { // Тестируем граничные значения = 99
         Radio radio = new Radio();
-        radio.setCurrentVolume(9);
-        int expected = 9;
+        radio.setCurrentVolume(99);
+        int expected = 99;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldSetVolume5() { // Тестируем граничные значения = 10
+    public void shouldSetVolume5() { // Тестируем граничные значения = 100
         Radio radio = new Radio();
-        radio.setCurrentVolume(10);
-        int expected = 10;
+        radio.setCurrentVolume(100);
+        int expected = 100;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldSetVolume6() { // Тестируем граничные значения = 11
+    public void shouldSetVolume6() { // Тестируем граничные значения = 101
         Radio radio = new Radio();
-        radio.setCurrentVolume(11);
-        int expected = 10;
+        radio.setCurrentVolume(101);
+        int expected = 100;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
@@ -241,9 +415,9 @@ public class RadioTest {
     @Test
     public void shouldIncreaseVolume() { // Тестируем увеличение звука
         Radio radio = new Radio();
-        radio.setCurrentVolume(6);
+        radio.setCurrentVolume(76);
         radio.increaseVolume();
-        int expected = 7;
+        int expected = 77;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
@@ -269,21 +443,21 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldIncreaseLimitVolume3() { // Тестируем граничные значения = 9, при увеличении звука
+    public void shouldIncreaseLimitVolume3() { // Тестируем граничные значения = 99, при увеличении звука
         Radio radio = new Radio();
-        radio.setCurrentVolume(9);
+        radio.setCurrentVolume(99);
         radio.increaseVolume();
-        int expected = 10;
+        int expected = 100;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldIncreaseLimitVolume4() { // Тестируем граничные значения = 10, при увеличении звука
+    public void shouldIncreaseLimitVolume4() { // Тестируем граничные значения = 100, при увеличении звука
         Radio radio = new Radio();
-        radio.setCurrentVolume(10);
+        radio.setCurrentVolume(100);
         radio.increaseVolume();
-        int expected = 10;
+        int expected = 100;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
@@ -291,9 +465,9 @@ public class RadioTest {
     @Test
     public void shouldDecreaseVolume() { // Тестируем уменьшение звука
         Radio radio = new Radio();
-        radio.setCurrentVolume(7);
+        radio.setCurrentVolume(87);
         radio.decreaseVolume();
-        int expected = 6;
+        int expected = 86;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
@@ -321,19 +495,19 @@ public class RadioTest {
     @Test
     public void shouldDecreaseLimitVolume3() { // Тестируем граничные значения = 9, при уменьшении звука
         Radio radio = new Radio();
-        radio.setCurrentVolume(9);
+        radio.setCurrentVolume(99);
         radio.decreaseVolume();
-        int expected = 8;
+        int expected = 98;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldDecreaseLimitVolume4() { // Тестируем граничные значения = 10, при уменьшении звука
+    public void shouldDecreaseLimitVolume4() { // Тестируем граничные значения = 100, при уменьшении звука
         Radio radio = new Radio();
-        radio.setCurrentVolume(10);
+        radio.setCurrentVolume(100);
         radio.decreaseVolume();
-        int expected = 9;
+        int expected = 99;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
